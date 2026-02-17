@@ -1,0 +1,37 @@
+{
+  "project": "HerPath",
+  "paths": [
+    {
+      "id": "cs-fundamentals",
+      "title": "CS Fundamentals",
+      "description": "Logic, algorithms, and how computers think.",
+      "weeks": [
+        { "week": 1, "topic": "Computational Thinking", "tasks": ["Binary numbers basics", "Logic gates game"] }
+      ]
+    },
+    {
+      "id": "web-dev",
+      "title": "Web Development",
+      "description": "Building the modern internet with HTML, CSS, and JS.",
+      "weeks": [
+        { "week": 1, "topic": "The Skeleton of the Web", "tasks": ["HTML tags", "Building your first site"] }
+      ]
+    },
+    {
+      "id": "mobile-dev",
+      "title": "Mobile Development",
+      "description": "Creating apps for the phones in your pocket.",
+      "weeks": [
+        { "week": 1, "topic": "UI/UX Basics", "tasks": ["Mobile app layouts", "Intro to Flutter or React Native"] }
+      ]
+    },
+    {
+      "id": "english-lang",
+      "title": "Business English",
+      "description": "Professional communication for the tech world.",
+      "weeks": [
+        { "week": 1, "topic": "Tech Vocabulary", "tasks": ["Common coding terms", "Writing a professional email"] }
+      ]
+    }
+  ]
+}
