@@ -286,6 +286,45 @@ h1,h2,h3{font-family:"Lora",serif;font-weight:600;line-height:1.3}
 .mob-nav-btn.active{border-top-color:var(--teal)}
 .mob-nav-btn.active .m-lbl{color:var(--teal)}
 
+/* ── LOGIN SCREEN ── */
+#login-screen{position:fixed;inset:0;z-index:200;background:linear-gradient(145deg,#0e2222 0%,#1e4040 50%,#2a6b5e 100%);display:flex;align-items:center;justify-content:center;padding:20px}
+#login-screen.off{display:none}
+.login-card{background:var(--paper);border-radius:var(--r-xl);padding:32px 28px;width:100%;max-width:400px;box-shadow:0 28px 70px rgba(0,0,0,.45)}
+.login-logo{text-align:center;margin-bottom:26px}
+.login-logo-leaf{font-size:34px;display:block;margin-bottom:6px}
+.login-logo-mark{font-family:"Lora",serif;font-size:26px;font-weight:600;color:var(--teal)}
+.login-tagline{font-size:13px;color:var(--muted);margin-top:3px}
+.login-field{margin-bottom:14px}
+.login-label{display:block;font-size:12px;font-weight:700;color:var(--muted);letter-spacing:.4px;margin-bottom:5px;text-transform:uppercase}
+.login-input{width:100%;border:1.5px solid var(--border);border-radius:var(--r-md);padding:11px 14px;font-size:15px;font-family:"Nunito",sans-serif;color:var(--ink);background:var(--white);outline:none;transition:border .15s;-webkit-appearance:none}
+.login-input:focus{border-color:var(--teal);box-shadow:0 0 0 3px rgba(42,107,94,.1)}
+.login-input::placeholder{color:#bbb}
+/* PIN dots */
+.pin-dots{display:flex;gap:10px;justify-content:center;margin:14px 0 6px}
+.pin-dot{width:14px;height:14px;border-radius:50%;background:var(--ruled);border:2px solid var(--border);transition:all .2s}
+.pin-dot.filled{background:var(--teal);border-color:var(--teal)}
+.pin-dot.error{background:var(--rose);border-color:var(--rose)}
+.pin-keypad{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px}
+.pin-key{border:1.5px solid var(--border);background:var(--white);border-radius:var(--r-md);padding:14px 0;font-size:18px;font-weight:600;font-family:"Nunito",sans-serif;color:var(--ink);cursor:pointer;transition:all .12s;user-select:none;-webkit-tap-highlight-color:transparent}
+.pin-key:hover{background:var(--teal-lt);border-color:var(--teal-mid)}
+.pin-key:active{transform:scale(.94);background:var(--teal-lt)}
+.pin-key.del{font-size:14px;color:var(--muted)}
+.pin-key.blank{visibility:hidden;pointer-events:none}
+.login-btn{width:100%;background:var(--teal);color:#fff;border:none;border-radius:var(--r-md);padding:13px;font-size:15px;font-weight:700;font-family:"Nunito",sans-serif;cursor:pointer;transition:background .15s;margin-top:4px}
+.login-btn:hover{background:#1d5047}
+.login-btn:disabled{background:#aac9c4;cursor:default}
+.login-err{font-size:13px;color:var(--rose);text-align:center;min-height:18px;margin-bottom:8px;font-weight:600}
+.login-step{font-size:12px;color:var(--muted);text-align:center;margin-bottom:18px;line-height:1.5}
+.login-step b{color:var(--ink)}
+.login-back-link{display:block;text-align:center;font-size:12px;color:var(--muted);margin-top:14px;cursor:pointer;transition:color .15s}
+.login-back-link:hover{color:var(--teal)}
+/* avatar/colour pickers on create */
+.lc-av-grid{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0 12px}
+.lc-col-row{display:flex;gap:7px;margin:6px 0 14px}
+/* Sign out button */
+.signout-btn{display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:var(--r-sm);color:rgba(255,255,255,.55);font-size:12px;padding:6px 12px;cursor:pointer;font-family:"Nunito",sans-serif;transition:all .2s;width:100%}
+.signout-btn:hover{background:rgba(184,92,110,.25);border-color:rgba(184,92,110,.4);color:#f5b8c4}
+
 /* ── ENCOURAGEMENT EDITOR ── */
 .enc-card{background:linear-gradient(135deg,#f5f0e8,#fdf9f3);border:1.5px solid #e8cfa8;border-radius:var(--r-lg);padding:20px;margin-bottom:14px;position:relative}
 .enc-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:var(--amber);margin-bottom:8px}
@@ -315,61 +354,108 @@ h1,h2,h3{font-family:"Lora",serif;font-weight:600;line-height:1.3}
   <button class="safe-unlock" onclick="toggleSafe()" data-en="Return to app" data-fa="بازگشت">Return to app</button>
 </div>
 
-<!-- PROFILE SCREEN -->
-<div id="profile-screen">
-  <div class="ps-card">
-    <div class="ps-logo">
-      <span class="ps-logo-leaf">🌿</span>
-      <div class="ps-logo-mark">HerPath</div>
-      <div class="ps-subtitle" data-en="Who is studying today?" data-fa="امروز چه کسی درس می‌خواند؟">Who is studying today?</div>
-    </div>
-    <div id="ps-profile-list"></div>
-    <button class="ps-add-btn" id="ps-add-toggle" onclick="showAddForm()">
-      <span>＋</span><span data-en="Add new learner" data-fa="افزودن یادگیرنده جدید">Add new learner</span>
-    </button>
-    <div class="add-form hidden" id="ps-add-form">
-      <label class="af-label" data-en="Name" data-fa="نام">Name</label>
-      <input class="af-input" id="ps-name-input" maxlength="22" placeholder="e.g. Fatima"/>
-      <label class="af-label" data-en="Icon" data-fa="آیکون">Icon</label>
-      <div class="av-grid" id="ps-av-grid">
-        <div class="av-opt sel" data-v="👩" onclick="pickAv(this)">👩</div>
-        <div class="av-opt" data-v="👧" onclick="pickAv(this)">👧</div>
-        <div class="av-opt" data-v="🧕" onclick="pickAv(this)">🧕</div>
-        <div class="av-opt" data-v="👩‍🎓" onclick="pickAv(this)">👩‍🎓</div>
-        <div class="av-opt" data-v="🌺" onclick="pickAv(this)">🌺</div>
-        <div class="av-opt" data-v="⭐" onclick="pickAv(this)">⭐</div>
-        <div class="av-opt" data-v="🦋" onclick="pickAv(this)">🦋</div>
-        <div class="av-opt" data-v="📚" onclick="pickAv(this)">📚</div>
-      </div>
-      <label class="af-label" data-en="Colour" data-fa="رنگ">Colour</label>
-      <div class="color-row" id="ps-col-grid">
-        <div class="col-opt sel" data-v="#2a6b5e" style="background:#2a6b5e" onclick="pickCol(this)"></div>
-        <div class="col-opt" data-v="#b85c6e" style="background:#b85c6e" onclick="pickCol(this)"></div>
-        <div class="col-opt" data-v="#c4763a" style="background:#c4763a" onclick="pickCol(this)"></div>
-        <div class="col-opt" data-v="#5c7eb8" style="background:#5c7eb8" onclick="pickCol(this)"></div>
-        <div class="col-opt" data-v="#7a5cb8" style="background:#7a5cb8" onclick="pickCol(this)"></div>
-        <div class="col-opt" data-v="#4a8c5c" style="background:#4a8c5c" onclick="pickCol(this)"></div>
-      </div>
-      <div class="af-row">
-        <button class="btn-primary" onclick="createProfile()"><span data-en="Create" data-fa="ایجاد">Create</span></button>
-        <button class="btn-ghost" onclick="hideAddForm()"><span data-en="Cancel" data-fa="لغو">Cancel</span></button>
-      </div>
-    </div>
-    <div class="ps-lang"><button id="lang-btn-ps" onclick="toggleLang()">🌐 دری / English</button></div>
-  </div>
-</div>
+<!-- LOGIN SCREEN -->
+<div id="login-screen">
+  <div class="login-card">
 
-<!-- SWITCH MODAL -->
-<div id="switch-modal" class="off">
-  <div class="sw-card">
-    <div class="sw-header">
-      <h3 class="serif" data-en="Switch Learner" data-fa="تغییر یادگیرنده">Switch Learner</h3>
-      <button class="sw-close" onclick="closeSwitchModal()">✕</button>
+    <div class="login-logo">
+      <span class="login-logo-leaf">🌿</span>
+      <div class="login-logo-mark">HerPath</div>
+      <div class="login-tagline" data-en="Your private learning companion" data-fa="همراه یادگیری خصوصی شما">Your private learning companion</div>
     </div>
-    <div id="sw-list"></div>
-    <button class="ps-add-btn" style="margin-top:8px" onclick="closeSwitchModal();openProfileScreen()">
-      <span>＋</span><span data-en="Add new learner" data-fa="افزودن">Add new learner</span>
-    </button>
+
+    <!-- Step 1: enter name -->
+    <div id="ls-step-name">
+      <div class="login-field">
+        <label class="login-label" for="ls-name-input" data-en="Your name" data-fa="نام شما">Your name</label>
+        <input id="ls-name-input" class="login-input" type="text" maxlength="24"
+               autocomplete="off" autocorrect="off" spellcheck="false"
+               placeholder="Fatima"
+               onkeydown="if(event.key==='Enter')lsNameNext()"/>
+      </div>
+      <div class="login-err" id="ls-name-err"></div>
+      <button class="login-btn" onclick="lsNameNext()" data-en="Continue →" data-fa="ادامه ←">Continue →</button>
+      <div class="ps-lang" style="margin-top:16px"><button id="lang-btn-ps" onclick="toggleLang()">🌐 دری / English</button></div>
+    </div>
+
+    <!-- Step 2a: PIN entry for existing user -->
+    <div id="ls-step-pin" class="hidden">
+      <div class="login-step" id="ls-pin-caption"></div>
+      <div class="pin-dots">
+        <div class="pin-dot" id="pd0"></div>
+        <div class="pin-dot" id="pd1"></div>
+        <div class="pin-dot" id="pd2"></div>
+        <div class="pin-dot" id="pd3"></div>
+      </div>
+      <div class="login-err" id="ls-pin-err"></div>
+      <div class="pin-keypad">
+        <button class="pin-key" onclick="pinKey('1')">1</button>
+        <button class="pin-key" onclick="pinKey('2')">2</button>
+        <button class="pin-key" onclick="pinKey('3')">3</button>
+        <button class="pin-key" onclick="pinKey('4')">4</button>
+        <button class="pin-key" onclick="pinKey('5')">5</button>
+        <button class="pin-key" onclick="pinKey('6')">6</button>
+        <button class="pin-key" onclick="pinKey('7')">7</button>
+        <button class="pin-key" onclick="pinKey('8')">8</button>
+        <button class="pin-key" onclick="pinKey('9')">9</button>
+        <button class="pin-key blank"></button>
+        <button class="pin-key" onclick="pinKey('0')">0</button>
+        <button class="pin-key del" onclick="pinDel()">⌫</button>
+      </div>
+      <div class="login-back-link" onclick="lsBack()" data-en="← Back" data-fa="→ بازگشت">← Back</div>
+    </div>
+
+    <!-- Step 2b: create account (new user) -->
+    <div id="ls-step-create" class="hidden">
+      <div class="login-step" id="ls-create-caption"></div>
+
+      <p class="login-label" style="margin-bottom:6px" data-en="Choose an icon" data-fa="آیکون انتخاب کنید">Choose an icon</p>
+      <div class="lc-av-grid" id="lc-av-grid">
+        <div class="av-opt sel" data-v="👩" onclick="lcPickAv(this)">👩</div>
+        <div class="av-opt" data-v="👧" onclick="lcPickAv(this)">👧</div>
+        <div class="av-opt" data-v="🧕" onclick="lcPickAv(this)">🧕</div>
+        <div class="av-opt" data-v="👩‍🎓" onclick="lcPickAv(this)">👩‍🎓</div>
+        <div class="av-opt" data-v="🌺" onclick="lcPickAv(this)">🌺</div>
+        <div class="av-opt" data-v="⭐" onclick="lcPickAv(this)">⭐</div>
+        <div class="av-opt" data-v="🦋" onclick="lcPickAv(this)">🦋</div>
+        <div class="av-opt" data-v="📚" onclick="lcPickAv(this)">📚</div>
+      </div>
+
+      <p class="login-label" style="margin-bottom:4px" data-en="Choose a colour" data-fa="رنگ انتخاب کنید">Choose a colour</p>
+      <div class="lc-col-row" id="lc-col-row">
+        <div class="col-opt sel" data-v="#2a6b5e" style="background:#2a6b5e" onclick="lcPickCol(this)"></div>
+        <div class="col-opt" data-v="#b85c6e" style="background:#b85c6e" onclick="lcPickCol(this)"></div>
+        <div class="col-opt" data-v="#c4763a" style="background:#c4763a" onclick="lcPickCol(this)"></div>
+        <div class="col-opt" data-v="#5c7eb8" style="background:#5c7eb8" onclick="lcPickCol(this)"></div>
+        <div class="col-opt" data-v="#7a5cb8" style="background:#7a5cb8" onclick="lcPickCol(this)"></div>
+        <div class="col-opt" data-v="#4a8c5c" style="background:#4a8c5c" onclick="lcPickCol(this)"></div>
+      </div>
+
+      <p class="login-label" style="margin-bottom:6px" data-en="Set a 4-digit PIN" data-fa="یک PIN ۴ رقمی تنظیم کنید">Set a 4-digit PIN</p>
+      <div class="pin-dots">
+        <div class="pin-dot" id="cpd0"></div>
+        <div class="pin-dot" id="cpd1"></div>
+        <div class="pin-dot" id="cpd2"></div>
+        <div class="pin-dot" id="cpd3"></div>
+      </div>
+      <div class="login-err" id="ls-create-err"></div>
+      <div class="pin-keypad">
+        <button class="pin-key" onclick="createPinKey('1')">1</button>
+        <button class="pin-key" onclick="createPinKey('2')">2</button>
+        <button class="pin-key" onclick="createPinKey('3')">3</button>
+        <button class="pin-key" onclick="createPinKey('4')">4</button>
+        <button class="pin-key" onclick="createPinKey('5')">5</button>
+        <button class="pin-key" onclick="createPinKey('6')">6</button>
+        <button class="pin-key" onclick="createPinKey('7')">7</button>
+        <button class="pin-key" onclick="createPinKey('8')">8</button>
+        <button class="pin-key" onclick="createPinKey('9')">9</button>
+        <button class="pin-key blank"></button>
+        <button class="pin-key" onclick="createPinKey('0')">0</button>
+        <button class="pin-key del" onclick="createPinDel()">⌫</button>
+      </div>
+      <div class="login-back-link" onclick="lsBack()" data-en="← Back" data-fa="→ بازگشت">← Back</div>
+    </div>
+
   </div>
 </div>
 
@@ -384,7 +470,6 @@ h1,h2,h3{font-family:"Lora",serif;font-weight:600;line-height:1.3}
     <div class="sb-user">
       <div class="sb-avatar" id="sb-avatar">👩</div>
       <div><div class="sb-name" id="sb-name">—</div><div class="sb-pts" id="sb-pts">0 pts</div></div>
-      <button class="sb-switch-btn" onclick="openSwitchModal()" data-en="Switch" data-fa="تغییر">Switch</button>
     </div>
     <nav class="sb-nav">
       <button class="sb-nav-item active" id="sn-journey" onclick="goTab('journey',this)"><span class="icon">🗺</span><span data-en="My Journey" data-fa="سفر من">My Journey</span></button>
@@ -396,6 +481,9 @@ h1,h2,h3{font-family:"Lora",serif;font-weight:600;line-height:1.3}
     <div class="sb-footer">
       <div class="offline-pip"><div class="pip-dot" id="pip-dot-d"></div><span id="pip-lbl-d" data-en="Ready offline" data-fa="آماده آفلاین">Ready offline</span></div>
       <button class="lang-toggle" id="lang-btn-d" onclick="toggleLang()">🌐 دری / EN</button>
+      <button class="signout-btn" onclick="signOut()">
+        <span>↩</span><span data-en="Sign Out" data-fa="خروج">Sign Out</span>
+      </button>
     </div>
   </aside>
 
@@ -404,7 +492,8 @@ h1,h2,h3{font-family:"Lora",serif;font-weight:600;line-height:1.3}
       <button id="burger" onclick="toggleSidebar()">☰</button>
       <div id="topbar-title" data-en="My Journey" data-fa="سفر من">My Journey</div>
       <div class="topbar-clock" id="topbar-clock"></div>
-      <button class="topbar-switch-btn" onclick="openSwitchModal()"><span id="tb-avatar">👩</span> <span data-en="Switch" data-fa="تغییر">Switch</span></button>
+      <span id="tb-user" style="font-size:13px;font-weight:600;color:var(--muted)"></span>
+      <button class="topbar-switch-btn" onclick="signOut()">↩ <span data-en="Sign Out" data-fa="خروج">Sign Out</span></button>
       <button id="safe-mode-btn" onclick="toggleSafe()" title="Safe mode">🛡</button>
     </div>
 
@@ -434,7 +523,7 @@ h1,h2,h3{font-family:"Lora",serif;font-weight:600;line-height:1.3}
             <!-- Daily encouragement -->
             <div class="enc-card" id="enc-card">
               <div class="enc-label" data-en="Today's Encouragement" data-fa="تشویق امروز">Today's Encouragement</div>
-              <div class="enc-msg" id="enc-msg">Education belongs to everyone. It is a human right that knows no gender and no borders.</div>
+              <div class="enc-msg" id="enc-msg">You are brave, you are smart, and every word you learn is proof of your courage. Keep going.</div>
               <button class="enc-edit-btn" onclick="toggleEncEditor()" data-en="Edit" data-fa="ویرایش">Edit</button>
               <div class="enc-editor" id="enc-editor">
                 <textarea class="enc-textarea" id="enc-textarea" rows="3"></textarea>
@@ -937,59 +1026,267 @@ var STARTERS = {
 /* ================================================================
    STATE & STORAGE
 ================================================================ */
-var SK_P="hp_profiles", SK_A="hp_active", SK_L="hp_lang", SK_ENC="hp_enc";
+var SK_P="hp_profiles", SK_L="hp_lang", SK_ENC="hp_enc";
 var profiles=[], activeId=null, currentLang="en", safeMode=false;
 var selectedAv="👩", selectedColor="#2a6b5e";
 var currentWeek=1;
 
 var DEFAULT_ENC = "You are brave, you are smart, and every word you learn is proof of your courage. Keep going.";
 
-function save(){try{localStorage.setItem(SK_P,JSON.stringify(profiles));localStorage.setItem(SK_A,activeId||"");localStorage.setItem(SK_L,currentLang);}catch(e){}}
-function load(){try{var r=localStorage.getItem(SK_P);profiles=r?JSON.parse(r):[];activeId=localStorage.getItem(SK_A)||null;currentLang=localStorage.getItem(SK_L)||"en";}catch(e){profiles=[];activeId=null;currentLang="en";}if(activeId&&!profiles.find(function(p){return p.id===activeId;}))activeId=null;}
+function save(){try{localStorage.setItem(SK_P,JSON.stringify(profiles));localStorage.setItem(SK_L,currentLang);}catch(e){}}
+function load(){try{var r=localStorage.getItem(SK_P);profiles=r?JSON.parse(r):[];currentLang=localStorage.getItem(SK_L)||"en";}catch(e){profiles=[];currentLang="en";}}
 function newProgress(){return{tasksDone:[false,false,false,false,false],subtasksDone:{},points:0,encouragement:DEFAULT_ENC};}
 function getActive(){return profiles.find(function(p){return p.id===activeId;})||null;}
 
 /* ================================================================
-   PROFILE SCREEN
+   AUTH — PIN LOGIN SYSTEM
+   Security notes:
+   · PINs are hashed with a simple XOR+fold before storage —
+     plain-text PINs never touch localStorage.
+   · The login page shows NO list of registered users.
+   · activeId is only set in sessionStorage (cleared on tab close).
+   · profiles[] in localStorage stores only { id, pinHash, avatar, color, progress }.
+     The display name is also stored (needed for greeting) but no PIN.
 ================================================================ */
-function renderPS(){
-  var list=document.getElementById("ps-profile-list");if(!list)return;
-  if(!profiles.length){list.innerHTML="<p style='text-align:center;color:var(--muted);font-size:13px;padding:6px 0 12px'>No profiles yet.</p>";return;}
-  list.innerHTML=profiles.map(function(p){return"<button class='profile-entry' onclick='selectProfile(\""+p.id+"\")'><div class='pe-avatar' style='background:"+p.color+"22;border:2px solid "+p.color+"40'>"+p.avatar+"</div><div><div class='pe-name'>"+esc(p.name)+"</div><div class='pe-meta'>"+p.progress.points+" pts</div></div><span class='pe-arrow'>›</span></button>";}).join("");
-}
-function showAddForm(){document.getElementById("ps-add-toggle").classList.add("hidden");document.getElementById("ps-add-form").classList.remove("hidden");document.getElementById("ps-name-input").focus();}
-function hideAddForm(){document.getElementById("ps-add-toggle").classList.remove("hidden");document.getElementById("ps-add-form").classList.add("hidden");document.getElementById("ps-name-input").value="";}
-function pickAv(el){document.querySelectorAll("#ps-av-grid .av-opt").forEach(function(o){o.classList.remove("sel");});el.classList.add("sel");selectedAv=el.getAttribute("data-v");}
-function pickCol(el){document.querySelectorAll("#ps-col-grid .col-opt").forEach(function(o){o.classList.remove("sel");});el.classList.add("sel");selectedColor=el.getAttribute("data-v");}
-function createProfile(){
-  var inp=document.getElementById("ps-name-input"),name=inp?inp.value.trim():"";
-  if(!name){if(inp)inp.focus();toast(currentLang==="fa"?"لطفاً نام وارد کنید":"Please enter a name");return;}
-  profiles.push({id:"p"+Date.now(),name:name,avatar:selectedAv,color:selectedColor,progress:newProgress()});
-  save();hideAddForm();renderPS();toast(currentLang==="fa"?"پروفایل ایجاد شد ✨":"Profile created ✨");
-}
-function selectProfile(id){activeId=id;save();document.getElementById("profile-screen").classList.add("off");document.getElementById("app-shell").classList.remove("hidden");renderApp();}
-function openProfileScreen(){document.getElementById("app-shell").classList.add("hidden");document.getElementById("profile-screen").classList.remove("off");document.getElementById("switch-modal").classList.add("off");renderPS();}
 
-/* ================================================================
-   SWITCH MODAL
-================================================================ */
-function openSwitchModal(){
-  var list=document.getElementById("sw-list");
-  if(list)list.innerHTML=profiles.map(function(p){var m=p.id===activeId;return"<button class='profile-entry' style='"+(m?"border-color:var(--teal);background:var(--teal-xlt)":"")+"\' onclick='doSwitch(\""+p.id+"\")'><div class='pe-avatar' style='background:"+p.color+"22;border:2px solid "+p.color+"40'>"+p.avatar+"</div><div><div class='pe-name' style='"+(m?"color:var(--teal)":"")+"'>"+esc(p.name)+(m?" ✓":"")+"</div><div class='pe-meta'>"+p.progress.points+" pts</div></div><span class='pe-arrow'>›</span></button>";}).join("");
-  document.getElementById("switch-modal").classList.remove("off");
+// Simple deterministic hash: good enough to prevent casual snooping,
+// not meant to replace bcrypt — this is a client-side offline app.
+function hashPin(name, pin) {
+  var s = name.toLowerCase().trim() + ":" + pin + ":herpath2024";
+  var h = 0;
+  for (var i = 0; i < s.length; i++) {
+    h = ((h << 5) - h) + s.charCodeAt(i);
+    h = h & h; // force 32-bit
+  }
+  return (h >>> 0).toString(16); // unsigned hex string
 }
-function closeSwitchModal(){document.getElementById("switch-modal").classList.add("off");}
-function doSwitch(id){activeId=id;save();closeSwitchModal();renderApp();var p=getActive();if(p)toast((currentLang==="fa"?"سلام، ":"Welcome back, ")+p.name+"!");}
+
+// Login flow state
+var _lsName = "";        // name entered on step 1
+var _lsPin  = "";        // digits typed so far (sign-in)
+var _lcPin  = "";        // digits typed so far (create)
+var _lcAv   = "👩";
+var _lcCol  = "#2a6b5e";
+var _lsMode = "";        // "signin" | "create"
+
+function lsShowStep(stepId) {
+  ["ls-step-name","ls-step-pin","ls-step-create"].forEach(function(id) {
+    var el = document.getElementById(id);
+    if (el) el.classList.toggle("hidden", el.id !== stepId);
+  });
+}
+
+/* Step 1 — user types their name and hits Continue */
+function lsNameNext() {
+  var inp = document.getElementById("ls-name-input");
+  var name = inp ? inp.value.trim() : "";
+  if (!name) {
+    setText("ls-name-err", currentLang === "fa" ? "لطفاً نام وارد کنید" : "Please enter your name");
+    inp && inp.focus();
+    return;
+  }
+  setText("ls-name-err", "");
+  _lsName = name;
+
+  // Check if this name already has an account (case-insensitive)
+  var existing = profiles.find(function(p) {
+    return p.name.toLowerCase() === name.toLowerCase();
+  });
+
+  if (existing) {
+    // Sign-in flow
+    _lsMode = "signin";
+    _lsPin = "";
+    updatePinDots("pd", "");
+    setText("ls-pin-err", "");
+    var caption = document.getElementById("ls-pin-caption");
+    if (caption) {
+      caption.innerHTML = (currentLang === "fa")
+        ? "خوش آمدید، <b>" + esc(existing.name) + "</b>!<br>PIN خود را وارد کنید."
+        : "Welcome back, <b>" + esc(existing.name) + "</b>!<br>Enter your PIN to continue.";
+    }
+    lsShowStep("ls-step-pin");
+  } else {
+    // Create account flow
+    _lsMode = "create";
+    _lcPin = "";
+    _lcAv  = "👩";
+    _lcCol = "#2a6b5e";
+    updatePinDots("cpd", "");
+    setText("ls-create-err", "");
+    document.querySelectorAll("#lc-av-grid .av-opt").forEach(function(o) {
+      o.classList.toggle("sel", o.getAttribute("data-v") === "👩");
+    });
+    document.querySelectorAll("#lc-col-row .col-opt").forEach(function(o) {
+      o.classList.toggle("sel", o.getAttribute("data-v") === "#2a6b5e");
+    });
+    var cap2 = document.getElementById("ls-create-caption");
+    if (cap2) {
+      cap2.innerHTML = (currentLang === "fa")
+        ? "حساب جدید برای <b>" + esc(name) + "</b><br>یک PIN ۴ رقمی انتخاب کنید."
+        : "Create account for <b>" + esc(name) + "</b><br>Choose a 4-digit PIN.";
+    }
+    lsShowStep("ls-step-create");
+  }
+}
+
+/* Go back to name step */
+function lsBack() {
+  _lsPin = ""; _lcPin = "";
+  updatePinDots("pd", ""); updatePinDots("cpd", "");
+  setText("ls-pin-err", ""); setText("ls-create-err", "");
+  lsShowStep("ls-step-name");
+  var inp = document.getElementById("ls-name-input");
+  if (inp) { inp.value = _lsName; inp.focus(); }
+}
+
+/* Update the 4 dot indicators */
+function updatePinDots(prefix, pin, isError) {
+  for (var i = 0; i < 4; i++) {
+    var dot = document.getElementById(prefix + i);
+    if (!dot) continue;
+    dot.classList.toggle("filled", i < pin.length && !isError);
+    dot.classList.toggle("error", !!isError);
+  }
+}
+
+/* ── Sign-in PIN keypad ── */
+function pinKey(digit) {
+  if (_lsPin.length >= 4) return;
+  _lsPin += digit;
+  updatePinDots("pd", _lsPin, false);
+  setText("ls-pin-err", "");
+  if (_lsPin.length === 4) {
+    setTimeout(function() { lsSubmitPin(); }, 80);
+  }
+}
+function pinDel() {
+  _lsPin = _lsPin.slice(0, -1);
+  updatePinDots("pd", _lsPin, false);
+  setText("ls-pin-err", "");
+}
+function lsSubmitPin() {
+  var existing = profiles.find(function(p) {
+    return p.name.toLowerCase() === _lsName.toLowerCase();
+  });
+  if (!existing) { lsBack(); return; }
+  var hash = hashPin(existing.name, _lsPin);
+  if (hash === existing.pinHash) {
+    // Correct PIN — open session
+    activeId = existing.id;
+    try { sessionStorage.setItem("hp_session", activeId); } catch(e) {}
+    enterApp();
+  } else {
+    // Wrong PIN
+    updatePinDots("pd", "xxxx", true);
+    setText("ls-pin-err", currentLang === "fa" ? "PIN اشتباه است. دوباره امتحان کنید." : "Incorrect PIN. Please try again.");
+    _lsPin = "";
+    setTimeout(function() {
+      updatePinDots("pd", "", false);
+    }, 900);
+  }
+}
+
+/* ── Create account PIN keypad ── */
+function createPinKey(digit) {
+  if (_lcPin.length >= 4) return;
+  _lcPin += digit;
+  updatePinDots("cpd", _lcPin, false);
+  setText("ls-create-err", "");
+  if (_lcPin.length === 4) {
+    setTimeout(function() { lcSubmitCreate(); }, 80);
+  }
+}
+function createPinDel() {
+  _lcPin = _lcPin.slice(0, -1);
+  updatePinDots("cpd", _lcPin, false);
+  setText("ls-create-err", "");
+}
+function lcSubmitCreate() {
+  if (_lcPin.length < 4) {
+    setText("ls-create-err", currentLang === "fa" ? "لطفاً ۴ رقم وارد کنید" : "Please enter all 4 digits");
+    return;
+  }
+  // Double-check name isn't taken (race condition guard)
+  var clash = profiles.find(function(p) {
+    return p.name.toLowerCase() === _lsName.toLowerCase();
+  });
+  if (clash) {
+    setText("ls-create-err", currentLang === "fa" ? "این نام قبلاً ثبت شده" : "This name is already registered");
+    _lcPin = ""; updatePinDots("cpd", "");
+    return;
+  }
+  var id = "p" + Date.now();
+  var hash = hashPin(_lsName, _lcPin);
+  profiles.push({
+    id: id,
+    name: _lsName,
+    pinHash: hash,
+    avatar: _lcAv,
+    color: _lcCol,
+    progress: newProgress()
+  });
+  save();
+  activeId = id;
+  try { sessionStorage.setItem("hp_session", activeId); } catch(e) {}
+  enterApp();
+  toast((currentLang === "fa" ? "پروفایل ایجاد شد ✨ " : "Account created ✨ ") + _lsName);
+}
+function lcPickAv(el) {
+  document.querySelectorAll("#lc-av-grid .av-opt").forEach(function(o) { o.classList.remove("sel"); });
+  el.classList.add("sel");
+  _lcAv = el.getAttribute("data-v");
+}
+function lcPickCol(el) {
+  document.querySelectorAll("#lc-col-row .col-opt").forEach(function(o) { o.classList.remove("sel"); });
+  el.classList.add("sel");
+  _lcCol = el.getAttribute("data-v");
+}
+
+/* Enter the main app after successful auth */
+function enterApp() {
+  document.getElementById("login-screen").classList.add("off");
+  document.getElementById("app-shell").classList.remove("hidden");
+  // Reset login form for next time
+  _lsPin = ""; _lcPin = "";
+  var ni = document.getElementById("ls-name-input");
+  if (ni) ni.value = "";
+  lsShowStep("ls-step-name");
+  renderApp();
+}
+
+/* Sign Out — clear session, return to login, show NO user list */
+function signOut() {
+  activeId = null;
+  try { sessionStorage.removeItem("hp_session"); } catch(e) {}
+  document.getElementById("app-shell").classList.add("hidden");
+  document.getElementById("login-screen").classList.remove("off");
+  lsShowStep("ls-step-name");
+  var inp = document.getElementById("ls-name-input");
+  if (inp) { inp.value = ""; inp.focus(); }
+  setText("ls-name-err", "");
+  applyLang();
+}
+
+/* Legacy stubs kept so nothing else breaks */
+function openProfileScreen() { signOut(); }
+function openSwitchModal()   {}
+function closeSwitchModal()  {}
+function renderPS()          {}
 
 /* ================================================================
    RENDER APP
 ================================================================ */
-function renderApp(){
-  var p=getActive();if(!p)return;
-  setText("sb-name",p.name);setText("sb-pts",p.progress.points+" pts");
-  setHTML("sb-avatar",p.avatar);setHTML("tb-avatar",p.avatar);
-  var av=document.getElementById("sb-avatar");if(av)av.style.background=p.color+"22";
-  renderWeekPills();renderWeekRoadmap();renderTasks();renderStats();renderLibraryGrid();renderEncouragement();applyLang();
+function renderApp() {
+  var p = getActive(); if (!p) return;
+  setText("sb-name",  p.name);
+  setText("sb-pts",   p.progress.points + " pts");
+  setHTML("sb-avatar", p.avatar);
+  setText("tb-user",  p.avatar + " " + p.name);
+  var av = document.getElementById("sb-avatar");
+  if (av) av.style.background = p.color + "22";
+  renderWeekPills(); renderWeekRoadmap(); renderTasks();
+  renderStats(); renderLibraryGrid(); renderEncouragement(); applyLang();
 }
 
 /* ================================================================
@@ -1359,14 +1656,31 @@ function esc(s){return s.replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"
    INIT
 ================================================================ */
 document.addEventListener("DOMContentLoaded",function(){
-  load();applyLang();renderPS();tick();setInterval(tick,15000);updateOffline();
-  if(activeId&&profiles.find(function(p){return p.id===activeId;})){
-    document.getElementById("profile-screen").classList.add("off");
+  load();
+  applyLang();
+  tick();
+  setInterval(tick, 15000);
+  updateOffline();
+
+  // Restore session if the same tab is still open (sessionStorage survives refresh)
+  var sess = null;
+  try { sess = sessionStorage.getItem("hp_session"); } catch(e) {}
+  if (sess && profiles.find(function(p){ return p.id === sess; })) {
+    activeId = sess;
+    document.getElementById("login-screen").classList.add("off");
     document.getElementById("app-shell").classList.remove("hidden");
     renderApp();
+  } else {
+    // No session — show the login screen (clean state)
+    lsShowStep("ls-step-name");
+    var inp = document.getElementById("ls-name-input");
+    if (inp) setTimeout(function(){ inp.focus(); }, 100);
   }
-  if("serviceWorker" in navigator){
-    window.addEventListener("load",function(){navigator.serviceWorker.register("/sw.js").catch(function(){});});
+
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", function(){
+      navigator.serviceWorker.register("/sw.js").catch(function(){});
+    });
   }
 });
 </script>
